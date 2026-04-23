@@ -79,10 +79,10 @@ const StateAnalysis = () => {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header with Filter */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                    <h2 className="text-3xl font-bold text-white tracking-tight">Regional Deep-Dive</h2>
-                    <p className="text-slate-400 mt-1">State-specific crime analysis with dynamic filtering and trends.</p>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 px-2">
+                <div className="flex-1">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-main)] tracking-tight">Regional Deep-Dive</h2>
+                    <p className="text-[var(--text-muted)] mt-1">State-specific crime analysis with dynamic filtering and trends.</p>
                 </div>
                 
                 <div className="relative group min-w-[320px]">
@@ -92,13 +92,13 @@ const StateAnalysis = () => {
                     <select 
                         value={selectedState}
                         onChange={handleStateChange}
-                        className="bg-surface-900 border border-white/10 text-slate-200 text-sm rounded-2xl py-4 pl-12 pr-12 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50 w-full transition-all cursor-pointer hover:border-primary/40 shadow-2xl hover:shadow-primary/10"
+                        className="bg-surface-900 border border-[var(--border-color)] text-[var(--text-main)] text-sm rounded-2xl py-4 pl-12 pr-12 appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50 w-full transition-all cursor-pointer hover:border-primary/40 shadow-2xl hover:shadow-primary/10"
                     >
                         {states.map(state => (
-                            <option key={state} value={state}>{state}</option>
+                            <option key={state} value={state} className="bg-surface-900 text-[var(--text-main)]">{state}</option>
                         ))}
                     </select>
-                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
+                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-[var(--text-muted)]">
                         <ChevronDown size={20} />
                     </div>
                 </div>
@@ -109,21 +109,21 @@ const StateAnalysis = () => {
                 <div className="glass-card bg-primary/5 border-primary/20 hover:bg-primary/10 transition-all hover:scale-105">
                     <p className="text-primary/70 text-xs font-bold uppercase tracking-widest mb-2">Cumulative Cases</p>
                     <div className="flex items-baseline gap-2">
-                        <h3 className="text-4xl font-bold text-white">{stateData.total.toLocaleString()}</h3>
+                        <h3 className="text-4xl font-bold text-[var(--text-main)]">{stateData.total.toLocaleString()}</h3>
                         <span className="text-primary text-sm font-medium">Reports</span>
                     </div>
                 </div>
                 <div className="glass-card bg-secondary/5 border-secondary/20 hover:bg-secondary/10 transition-all hover:scale-105">
                     <p className="text-secondary/70 text-xs font-bold uppercase tracking-widest mb-2">Latest Recording</p>
                     <div className="flex items-baseline gap-2">
-                        <h3 className="text-4xl font-bold text-white">{stateData.latestYear}</h3>
+                        <h3 className="text-4xl font-bold text-[var(--text-main)]">{stateData.latestYear}</h3>
                         <span className="text-secondary text-sm font-medium">Year</span>
                     </div>
                 </div>
                 <div className="glass-card bg-emerald-500/5 border-emerald-500/20 hover:bg-emerald-500/10 md:col-span-2 lg:col-span-1 transition-all hover:scale-105">
                     <p className="text-emerald-400/70 text-xs font-bold uppercase tracking-widest mb-2">Data Quality</p>
                     <div className="flex items-baseline gap-2">
-                        <h3 className="text-4xl font-bold text-white">High</h3>
+                        <h3 className="text-4xl font-bold text-[var(--text-main)]">High</h3>
                         <span className="text-emerald-400 text-sm font-medium">Verified</span>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ const StateAnalysis = () => {
                         <div className="p-2 bg-primary/20 rounded-xl text-primary">
                             <Activity size={18} />
                         </div>
-                        <h3 className="text-lg font-bold text-white">Crime Distribution</h3>
+                        <h3 className="text-lg font-bold text-[var(--text-main)]">Crime Distribution</h3>
                     </div>
                     <div className="h-72">
                         <ResponsiveContainer width="100%" height="100%">
@@ -156,7 +156,7 @@ const StateAnalysis = () => {
                                     ))}
                                 </Pie>
                                 <Tooltip 
-                                    contentStyle={{ backgroundColor: '#121214', borderColor: '#2a2a30', borderRadius: '16px' }}
+                                    contentStyle={{ backgroundColor: 'var(--surface-900)', borderColor: 'var(--border-color)', borderRadius: '16px', color: 'var(--text-main)' }}
                                 />
                                 <Legend verticalAlign="bottom" height={36} iconType="circle"/>
                             </PieChart>
@@ -170,17 +170,17 @@ const StateAnalysis = () => {
                         <div className="p-2 bg-secondary/20 rounded-xl text-secondary">
                             <AlertTriangle size={18} />
                         </div>
-                        <h3 className="text-lg font-bold text-white">Yearly Growth Trend</h3>
+                        <h3 className="text-lg font-bold text-[var(--text-main)]">Yearly Growth Trend</h3>
                     </div>
                     <div className="h-72">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={stateData.trend}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                                <XAxis dataKey="year" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} dy={10} />
-                                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-[var(--border-color)] opacity-20" vertical={false} />
+                                <XAxis dataKey="year" stroke="currentColor" className="text-[var(--text-muted)]" fontSize={12} tickLine={false} axisLine={false} dy={10} />
+                                <YAxis stroke="currentColor" className="text-[var(--text-muted)]" fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip 
                                     cursor={{fill: 'rgba(255, 255, 255, 0.05)'}}
-                                    contentStyle={{ backgroundColor: '#121214', borderColor: '#2a2a30', borderRadius: '16px' }}
+                                    contentStyle={{ backgroundColor: 'var(--surface-900)', borderColor: 'var(--border-color)', borderRadius: '16px', color: 'var(--text-main)' }}
                                 />
                                 <Bar dataKey="count" fill="#ff4d6d" radius={[6, 6, 0, 0]} barSize={45} />
                             </BarChart>
@@ -195,8 +195,8 @@ const StateAnalysis = () => {
                     <Info size={24} />
                 </div>
                 <div>
-                    <h4 className="text-white text-xl font-bold mb-2">Regional Intelligence Note</h4>
-                    <p className="text-slate-400 leading-relaxed max-w-3xl">
+                    <h4 className="text-[var(--text-main)] text-xl font-bold mb-2">Regional Intelligence Note</h4>
+                    <p className="text-[var(--text-muted)] leading-relaxed max-w-3xl">
                         The data for <span className="text-primary font-semibold">{selectedState}</span> shows patterns typical of regional reporting shifts. High numbers often correlate with better reporting infrastructure and legal aid availability rather than just absolute crime rates. Analysis of the distribution helps in allocating specialized resources for specific crime categories like Domestic Violence or Kidnapping.
                     </p>
                 </div>

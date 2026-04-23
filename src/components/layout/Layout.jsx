@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 const Layout = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
     return (
-        <div className="min-h-screen bg-slate-950 flex">
-            {/* Sidebar receives open state + close handler */}
+        <div className="min-h-screen bg-surface-950 flex">
+            {/* Sidebar - always visible on desktop */}
             <Sidebar
-                isOpen={sidebarOpen}
-                onClose={() => setSidebarOpen(false)}
+                isOpen={false}
+                onClose={() => {}}
             />
 
-            {/* Main content — offset only on desktop where sidebar is fixed */}
-            <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
-                <Header onMenuClick={() => setSidebarOpen(true)} />
-                <main className="flex-1 p-2 md:p-4 lg:p-6">
+            {/* Main content - proper flex layout without negative margins */}
+            <div className="flex-1 flex flex-col min-h-screen lg:ml-72">
+                <Header onMenuClick={() => {}} />
+                <main className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 transition-all">
                     <Outlet />
                 </main>
             </div>
@@ -26,3 +24,4 @@ const Layout = () => {
 };
 
 export default Layout;
+

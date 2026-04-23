@@ -59,13 +59,13 @@ const Prediction = () => {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h2 className="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
+                <div className="flex-1">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-main)] tracking-tight flex items-center gap-3">
                         <BrainCircuit className="text-primary" />
                         ML Forecasting
                     </h2>
-                    <p className="text-slate-400 mt-1">AI-powered predictive analytics for crime trend forecasting (2022-2024).</p>
+                    <p className="text-[var(--text-muted)] mt-1">AI-powered predictive analytics for crime trend forecasting (2022-2031).</p>
                 </div>
                 <div className="bg-primary/10 px-4 py-2 rounded-full border border-primary/30 text-primary text-sm font-bold flex items-center gap-2">
                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -73,38 +73,36 @@ const Prediction = () => {
                 </div>
             </div>
 
-            {/* Prediction Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Prediction Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 {futurePredictions.map((pred, i) => (
-                    <div key={pred.year} className="glass-card hover:border-primary/30 group transition-all hover:scale-105">
-                        <div className="flex items-center gap-3 mb-2 text-slate-400">
-                            <Target size={20} className="group-hover:text-primary transition-colors" />
-                            <span className="text-xs font-bold uppercase tracking-widest">Year {pred.year} Projection</span>
+                    <div key={pred.year} className="glass-card p-4 hover:border-primary/30 group transition-all hover:scale-105 flex flex-col justify-between min-h-[140px]">
+                        <div className="flex items-center gap-2 mb-2 text-[var(--text-muted)]">
+                            <Target size={16} className="group-hover:text-primary transition-colors flex-shrink-0" />
+                            <span className="text-[10px] font-bold uppercase tracking-widest truncate">Year {pred.year}</span>
                         </div>
-                        <h4 className="text-4xl font-bold text-white">{pred.predicted.toLocaleString()}</h4>
-                        <p className="text-primary/80 text-sm font-medium mt-2">Predicted Cases</p>
-                        <div className="mt-3 text-xs text-slate-500">
-                            Based on {i === 0 ? '21' : i === 1 ? '22' : '23'} years of historical data
-                        </div>
+                        <h4 className="text-2xl font-bold text-[var(--text-main)] truncate">{pred.predicted.toLocaleString()}</h4>
+                        <p className="text-primary/80 text-[10px] font-bold uppercase mt-1">Predicted Cases</p>
                     </div>
                 ))}
             </div>
+
 
             {/* Forecast Chart */}
             <div className="glass-card">
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h3 className="text-xl font-bold text-white">Future Crime Projection</h3>
-                        <p className="text-slate-400 text-sm">Linear regression projection compared to historical actuals</p>
+                        <h3 className="text-xl font-bold text-[var(--text-main)]">Future Crime Projection</h3>
+                        <p className="text-[var(--text-muted)] text-sm">Linear regression projection compared to historical actuals</p>
                     </div>
                     <div className="flex items-center gap-6 text-xs font-medium">
                         <div className="flex items-center gap-2">
                             <span className="w-3 h-3 bg-primary rounded-full" />
-                            <span className="text-slate-300">Actual Data</span>
+                            <span className="text-[var(--text-muted)]">Actual Data</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <span className="w-3 h-3 bg-secondary/40 border border-secondary border-dashed rounded-full" />
-                            <span className="text-slate-300">AI Prediction</span>
+                            <span className="text-[var(--text-muted)]">AI Prediction</span>
                         </div>
                     </div>
                 </div>
@@ -122,24 +120,26 @@ const Prediction = () => {
                                     <stop offset="95%" stopColor="#ff85a1" stopOpacity={0}/>
                                 </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-[var(--border-color)] opacity-20" vertical={false} />
                             <XAxis 
                                 dataKey="name" 
-                                stroke="#64748b" 
+                                stroke="currentColor" 
+                                className="text-[var(--text-muted)]"
                                 fontSize={12} 
                                 tickLine={false} 
                                 axisLine={false}
                                 dy={10}
                             />
                             <YAxis 
-                                stroke="#64748b" 
+                                stroke="currentColor" 
+                                className="text-[var(--text-muted)]"
                                 fontSize={12} 
                                 tickLine={false} 
                                 axisLine={false}
                                 tickFormatter={(value) => `${(value / 1000).toFixed(0)}k`}
                             />
                             <Tooltip 
-                                contentStyle={{ backgroundColor: '#121214', borderColor: '#2a2a30', borderRadius: '16px' }}
+                                contentStyle={{ backgroundColor: 'var(--surface-900)', borderColor: 'var(--border-color)', borderRadius: '16px', color: 'var(--text-main)' }}
                                 formatter={(value, name) => [
                                     value?.toLocaleString(), 
                                     name === 'actual' ? 'Historical Data' : 'AI Prediction'
@@ -172,12 +172,12 @@ const Prediction = () => {
             {/* Model Confidence & Accuracy */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8">
                 <div className="glass-card hover:border-primary/20 transition-all">
-                    <div className="flex items-center gap-3 mb-4 text-slate-400">
+                    <div className="flex items-center gap-3 mb-4 text-[var(--text-muted)]">
                         <Zap size={20} className="text-amber-400" />
-                        <h4 className="text-white font-bold">Prediction Logic</h4>
+                        <h4 className="text-[var(--text-main)] font-bold">Prediction Logic</h4>
                     </div>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                        The model uses <span className="text-primary font-semibold">Linear Regression</span> trained on 21 years of historical data (2001-2021). It analyzes year-over-year trends and generates statistically-grounded projections for 2022-2024.
+                    <p className="text-[var(--text-muted)] text-sm leading-relaxed">
+                        The model uses <span className="text-primary font-semibold">Linear Regression</span> trained on 21 years of historical data (2001-2021). It analyzes year-over-year trends and generates statistically-grounded projections for 2022-2031.
                     </p>
                     <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">
                         <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
@@ -185,11 +185,11 @@ const Prediction = () => {
                     </div>
                 </div>
                 <div className="glass-card hover:border-secondary/20 transition-all">
-                    <div className="flex items-center gap-3 mb-4 text-slate-400">
+                    <div className="flex items-center gap-3 mb-4 text-[var(--text-muted)]">
                         <TrendingUp size={20} className="text-emerald-400" />
-                        <h4 className="text-white font-bold">Trend Analysis</h4>
+                        <h4 className="text-[var(--text-main)] font-bold">Trend Analysis</h4>
                     </div>
-                    <p className="text-slate-400 text-sm leading-relaxed">
+                    <p className="text-[var(--text-muted)] text-sm leading-relaxed">
                         Projections indicate <span className="text-secondary font-semibold">continuing trends</span> in reported cases. Rising numbers often reflect increased awareness and improved reporting mechanisms rather than solely increased criminal activity.
                     </p>
                     <div className="mt-4 flex items-center gap-2 text-xs text-slate-500">

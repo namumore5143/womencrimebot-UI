@@ -27,11 +27,11 @@ export const predictFutureCrimes = (historicalData) => {
     const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
     const intercept = (sumY - slope * sumX) / n;
 
-    // Predict for next 3 years based on last year in data
+    // Predict for 10 years (2022-2031) based on last year in data (2021)
     const lastYear = parseInt(historicalData[historicalData.length - 1].year);
     const predictions = [];
 
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 10; i++) {
         const year = lastYear + i;
         const predictedValue = Math.round(slope * year + intercept);
         predictions.push({
@@ -41,6 +41,7 @@ export const predictFutureCrimes = (historicalData) => {
     }
 
     return predictions;
+
 };
 
 export const getPredictionChartData = (historicalData, predictions) => {

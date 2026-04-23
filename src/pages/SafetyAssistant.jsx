@@ -29,15 +29,15 @@ const HELPLINES = [
 
 /* ── Typing dots animation ── */
 const TypingIndicator = () => (
-    <div className="flex items-end gap-4 pl-2 animate-in fade-in duration-300">
-        <div className="w-12 h-12 rounded-xl bg-surface-700 border border-white/10 flex-shrink-0 flex items-center justify-center shadow-lg">
-            <Bot size={24} className="text-primary animate-pulse" />
+    <div className="flex items-end gap-3 sm:gap-4 pl-2 animate-in fade-in duration-300">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-surface-700 border border-[var(--border-color)] flex-shrink-0 flex items-center justify-center shadow-lg">
+            <Bot size={20} sm:size={24} className="text-primary animate-pulse" />
         </div>
-        <div className="bg-surface-700 border border-white/10 px-6 py-4 rounded-2xl rounded-bl-none shadow-lg">
-            <div className="flex gap-2 items-center">
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-3 h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        <div className="bg-surface-700 border border-[var(--border-color)] px-4 sm:px-6 py-3 sm:py-4 rounded-2xl rounded-bl-none shadow-lg">
+            <div className="flex gap-1.5 sm:gap-2 items-center">
+                <span className="w-2 sm:w-3 h-2 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2 sm:w-3 h-2 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2 sm:w-3 h-2 sm:h-3 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
         </div>
     </div>
@@ -60,27 +60,27 @@ const ChatMessage = ({ msg, onSuggestionClick, isNew }) => {
 
     return (
         <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} group ${isNew ? 'animate-in fade-in slide-in-from-bottom-4 duration-500' : ''}`}>
-            <div className={`flex gap-4 max-w-[70%] items-end ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+            <div className={`flex gap-2 sm:gap-4 max-w-[85%] sm:max-w-[70%] items-end ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
 
                 {/* Avatar */}
                 {!isUser && (
-                    <div className="w-12 h-12 rounded-xl bg-surface-700 border border-white/10 flex-shrink-0 flex items-center justify-center shadow-lg self-end mb-2">
-                        <Bot size={24} className="text-primary" />
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-surface-700 border border-[var(--border-color)] flex-shrink-0 flex items-center justify-center shadow-lg self-end mb-1 sm:mb-2">
+                        <Bot size={18} sm:size={24} className="text-primary" />
                     </div>
                 )}
                 {isUser && (
-                    <div className="w-12 h-12 rounded-xl pink-gradient flex-shrink-0 flex items-center justify-center shadow-lg shadow-primary/20 self-end mb-2">
-                        <User size={24} className="text-white" />
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl pink-gradient flex-shrink-0 flex items-center justify-center shadow-lg shadow-primary/20 self-end mb-1 sm:mb-2">
+                        <User size={18} sm:size={24} className="text-white" />
                     </div>
                 )}
 
                 {/* Bubble stack */}
-                <div className={`flex flex-col gap-2 min-w-0 ${isUser ? 'items-end' : 'items-start'}`}>
+                <div className={`flex flex-col gap-1 sm:gap-2 min-w-0 ${isUser ? 'items-end' : 'items-start'}`}>
                     {/* Main bubble */}
-                    <div className={`relative px-6 py-4 rounded-2xl text-base md:text-lg leading-relaxed shadow-lg whitespace-pre-wrap break-words transition-all hover:shadow-xl ${
+                    <div className={`relative px-4 sm:px-6 py-2.5 sm:py-4 rounded-2xl text-sm sm:text-lg leading-relaxed shadow-lg whitespace-pre-wrap break-words transition-all hover:shadow-xl ${
                         isUser
                             ? 'pink-gradient text-white rounded-br-none font-medium'
-                            : 'bg-surface-700 text-slate-100 border border-white/10 rounded-bl-none'
+                            : 'bg-surface-700 text-[var(--text-main)] border border-[var(--border-color)] rounded-bl-none'
                     }`}>
                         {msg.content}
 
@@ -88,25 +88,25 @@ const ChatMessage = ({ msg, onSuggestionClick, isNew }) => {
                         {!isUser && (
                             <button
                                 onClick={handleCopy}
-                                className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all bg-surface-600 border border-white/10 rounded-lg p-2 text-slate-300 hover:text-white hover:bg-surface-500 shadow-lg"
+                                className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all bg-surface-800 border border-[var(--border-color)] rounded-lg p-1.5 sm:p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-surface-700 shadow-lg"
                                 title="Copy"
                             >
-                                {copied ? <Check size={16} /> : <Copy size={16} />}
+                                {copied ? <Check size={14} sm:size={16} /> : <Copy size={14} sm:size={16} />}
                             </button>
                         )}
                     </div>
 
                     {/* Timestamp */}
-                    <span className={`text-xs text-slate-500 font-medium px-2 ${isUser ? 'pr-2' : 'pl-2'}`}>{time}</span>
+                    <span className={`text-[10px] sm:text-xs text-[var(--text-muted)] font-medium px-1 sm:px-2 ${isUser ? 'pr-2' : 'pl-2'}`}>{time}</span>
 
                     {/* Suggestion chips */}
                     {!isUser && msg.suggestions && msg.suggestions.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mt-2 max-w-full">
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-1 sm:mt-2 max-w-full">
                             {msg.suggestions.slice(0, 3).map((s, i) => (
                                 <button
                                     key={i}
                                     onClick={() => onSuggestionClick(s)}
-                                    className="text-xs px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 hover:text-white hover:border-primary/40 transition-all active:scale-95 shadow-sm"
+                                    className="text-[10px] sm:text-xs px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 hover:text-white hover:border-primary/40 transition-all active:scale-95 shadow-sm"
                                 >
                                     {s.length > 25 ? s.substring(0, 25) + '...' : s}
                                 </button>
@@ -147,7 +147,7 @@ const SafetyAssistant = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages, isLoading]);
+    }, [messages, isLoading, scrollToBottom]);
 
     const handleScroll = () => {
         const el = messagesContainerRef.current;
@@ -198,36 +198,37 @@ const SafetyAssistant = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex justify-center items-center p-4">
+        <div className="h-[calc(100vh-120px)] w-full flex justify-center items-center p-0 sm:p-2 md:p-4">
             {/* Centered Chat Container */}
-            <div className="w-full max-w-6xl h-[90vh] bg-[#0f0f11] rounded-3xl shadow-2xl border border-white/10 overflow-hidden flex flex-col lg:flex-row">
+            <div className="w-full h-full bg-surface-900 rounded-none sm:rounded-3xl shadow-2xl border border-[var(--border-color)] overflow-hidden flex flex-col lg:flex-row">
                 
-                {/* LEFT: Main Chat Area (70% on desktop) */}
-                <div className="flex-1 lg:flex-[7] flex flex-col">
+                {/* LEFT: Main Chat Area */}
+                <div className="flex-1 flex flex-col min-w-0 border-b lg:border-b-0 lg:border-r border-[var(--border-color)]">
                     {/* Chat Header */}
-                    <div className="bg-primary p-4 md:p-6 flex-shrink-0">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-3">
-                                <div className="p-3 bg-white/20 rounded-xl shadow-lg">
-                                    <ShieldCheck className="text-white" size={24} />
+                    <div className="bg-primary p-4 sm:p-6 flex-shrink-0">
+                        <div className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-3 min-w-0 flex-1">
+                                <div className="p-2 sm:p-3 bg-white/20 rounded-xl shadow-lg flex-shrink-0">
+                                    <ShieldCheck className="text-white" size={20} sm:size={24} />
                                 </div>
-                                <div>
-                                    <h3 className="text-xl md:text-2xl font-bold text-white">Women Crime Assistant</h3>
-                                    <p className="text-sm text-white/80">Empowering Safety through Data</p>
+                                <div className="min-w-0">
+                                    <h3 className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-none">Women Crime Assistant</h3>
+                                    <p className="text-xs sm:text-sm text-white/80 mt-1">Empowering Safety through Data</p>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <div className={`flex items-center gap-1 px-3 py-2 rounded-lg bg-white/20 border border-white/30 text-sm font-bold uppercase transition-all ${
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                                <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 border border-white/30 text-[10px] sm:text-xs font-bold uppercase transition-all ${
                                     isOnline ? 'text-emerald-300' : 'text-rose-300'
                                 }`}>
-                                    <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-300 animate-pulse' : 'bg-rose-300'}`} />
-                                    {isOnline ? 'Active' : 'Offline'}
+                                    <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-300 animate-pulse' : 'bg-rose-300'}`} />
+                                    <span className="hidden xs:inline">{isOnline ? 'Active' : 'Offline'}</span>
                                 </div>
                                 <button
                                     onClick={() => setMessages([messages[0]])}
-                                    className="p-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all"
+                                    className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all"
+                                    title="Reset Conversation"
                                 >
-                                    <RefreshCw size={20} />
+                                    <RefreshCw size={18} />
                                 </button>
                             </div>
                         </div>
@@ -237,7 +238,7 @@ const SafetyAssistant = () => {
                     <div
                         ref={messagesContainerRef}
                         onScroll={handleScroll}
-                        className="flex-1 overflow-y-auto px-4 md:px-6 py-4 md:py-6 space-y-6 bg-surface-800"
+                        className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 bg-surface-800 scroll-smooth"
                     >
                         {messages.map((msg, idx) => (
                             <ChatMessage
@@ -255,30 +256,29 @@ const SafetyAssistant = () => {
                     {showScrollBtn && (
                         <button
                             onClick={() => scrollToBottom()}
-                            className="absolute bottom-24 right-8 p-3 rounded-xl bg-primary text-white shadow-xl shadow-primary/40 hover:bg-primary-dark transition-all z-10"
+                            className="absolute bottom-32 right-8 p-3 rounded-full bg-primary text-white shadow-xl shadow-primary/40 hover:bg-primary-dark transition-all z-10 animate-bounce"
                         >
                             <ChevronDown size={20} />
                         </button>
                     )}
 
                     {/* Input Area */}
-                    <div className="p-3 md:p-4 bg-surface-900 border-t border-white/10">
+                    <div className="p-4 bg-surface-900 border-t border-[var(--border-color)]">
                         <form 
                             onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
-                            className="flex items-end gap-2 bg-surface-800 border border-white/10 rounded-xl p-2 md:p-3 focus-within:ring-2 focus-within:ring-primary/40 transition-all"
+                            className="flex items-end gap-2 bg-surface-800 border border-[var(--border-color)] rounded-2xl p-2 focus-within:ring-2 focus-within:ring-primary/40 transition-all max-w-4xl mx-auto w-full"
                         >
                             <textarea
                                 ref={textareaRef}
                                 value={input}
                                 onChange={(e) => {
                                     setInput(e.target.value);
-                                    // Auto-resize textarea
                                     e.target.style.height = 'auto';
                                     e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
                                 }}
-                                placeholder="Ask about crime trends, states, or safety..."
+                                placeholder="Ask about crime trends, states, or years..."
                                 disabled={isLoading}
-                                className="flex-1 bg-transparent text-slate-100 text-sm md:text-base placeholder-slate-500 focus:outline-none py-2 px-3 resize-none overflow-hidden min-h-[24px] max-h-[120px]"
+                                className="flex-1 bg-transparent text-[var(--text-main)] text-sm sm:text-base placeholder-[var(--text-muted)] focus:outline-none py-2.5 px-4 resize-none overflow-y-auto min-h-[44px] max-h-[120px]"
                                 rows={1}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -290,7 +290,7 @@ const SafetyAssistant = () => {
                             <button
                                 type="submit"
                                 disabled={!input.trim() || isLoading}
-                                className="pink-gradient hover:opacity-90 disabled:opacity-30 p-2 md:p-3 rounded-lg text-white transition-all active:scale-90 shadow-lg flex-shrink-0"
+                                className="pink-gradient hover:opacity-90 disabled:opacity-30 p-3 rounded-xl text-white transition-all active:scale-95 shadow-lg flex-shrink-0"
                             >
                                 {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Send size={20} />}
                             </button>
@@ -298,50 +298,58 @@ const SafetyAssistant = () => {
                     </div>
                 </div>
 
-                {/* RIGHT: Suggestions Panel (30% on desktop) */}
-                <div className="lg:flex-[3] bg-surface-900 border-l border-white/10 p-4 md:p-6 overflow-y-auto">
-                    <div className="space-y-6">
-                        {/* Quick Insights Title */}
+                {/* RIGHT: Suggestions Panel */}
+                <div className="w-full lg:w-80 xl:w-96 bg-surface-900 p-4 sm:p-6 overflow-y-auto flex-shrink-0">
+                    <div className="space-y-8">
+                        {/* Quick Insights */}
                         <div>
-                            <h4 className="text-xl font-bold text-white flex items-center gap-2 mb-2">
-                                <Sparkles size={20} className="text-primary" />
+                            <h4 className="text-lg font-bold text-[var(--text-main)] flex items-center gap-2 mb-4">
+                                <Sparkles size={18} className="text-primary" />
                                 Quick Insights
                             </h4>
-                            <p className="text-slate-400 text-sm">Click any question to get instant answers</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+                                {QUICK_STARTERS.map((q, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => sendMessage(q.query)}
+                                        className="w-full text-left p-3.5 rounded-xl bg-surface-800 border border-[var(--border-color)] hover:border-primary/40 text-[var(--text-main)] transition-all active:scale-[0.98] group"
+                                    >
+                                        <div className="font-bold text-xs sm:text-sm group-hover:text-primary transition-colors truncate">{q.label}</div>
+                                        <div className="text-[10px] text-[var(--text-muted)] mt-1">Click to analyze</div>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
 
-                        {/* Suggestion Buttons */}
-                        <div className="space-y-3">
-                            {QUICK_STARTERS.map((q, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => sendMessage(q.query)}
-                                    className="w-full text-left p-4 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary hover:text-white border border-primary/20 hover:border-primary/40 transition-all active:scale-95 shadow-lg hover:shadow-xl"
-                                >
-                                    <div className="font-medium">{q.label}</div>
-                                    <div className="text-xs opacity-70 mt-1">Get detailed analysis</div>
-                                </button>
-                            ))}
-                        </div>
-
-                        {/* Help Section */}
-                        <div className="border-t border-white/10 pt-6">
-                            <h4 className="text-lg font-bold text-white flex items-center gap-2 mb-4">
+                        {/* Helplines */}
+                        <div className="border-t border-[var(--border-color)] pt-6">
+                            <h4 className="text-lg font-bold text-[var(--text-main)] flex items-center gap-2 mb-4">
                                 <Smartphone size={18} className="text-secondary" />
-                                Emergency Help
+                                Emergency Helplines
                             </h4>
                             <div className="grid grid-cols-2 gap-3">
                                 {HELPLINES.map(h => (
                                     <a
                                         key={h.num}
                                         href={`tel:${h.num}`}
-                                        className="flex flex-col items-center justify-center p-4 rounded-xl bg-surface-800 border border-white/10 hover:border-secondary/40 transition-all group hover:scale-105"
+                                        className="flex flex-col items-center justify-center p-3.5 rounded-xl bg-surface-800 border border-[var(--border-color)] hover:border-secondary/50 transition-all group active:scale-95"
                                     >
-                                        <span className="text-xs text-slate-500 font-bold uppercase mb-1">{h.name.split(' ')[0]}</span>
-                                        <span className="text-white font-bold group-hover:text-secondary">{h.num}</span>
+                                        <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase mb-1">{h.name.split(' ')[0]}</span>
+                                        <span className="text-[var(--text-main)] font-black text-sm sm:text-base group-hover:text-secondary">{h.num}</span>
                                     </a>
                                 ))}
                             </div>
+                        </div>
+                        
+                        {/* Footer Info */}
+                        <div className="bg-primary/5 rounded-2xl p-4 border border-primary/10">
+                            <div className="flex items-center gap-2 text-primary font-bold text-xs mb-2">
+                                <Info size={14} />
+                                Did you know?
+                            </div>
+                            <p className="text-[10px] sm:text-xs text-[var(--text-muted)] leading-relaxed">
+                                This AI uses real government datasets (2001-2021) to provide accurate insights into crime trends across all Indian states.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -351,3 +359,4 @@ const SafetyAssistant = () => {
 };
 
 export default SafetyAssistant;
+

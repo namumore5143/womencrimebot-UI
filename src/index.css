@@ -5,23 +5,55 @@
   --color-primary-dark: #c9184a;
   --color-secondary: #ff85a1;
   --color-tertiary: #ffb3c1;
-  --color-surface-950: #0a0a0c;
-  --color-surface-900: #121214;
-  --color-surface-800: #1a1a1e;
-  --color-surface-700: #2a2a30;
+  
+  /* These will be overridden by CSS variables below */
+  --color-surface-950: var(--surface-950);
+  --color-surface-900: var(--surface-900);
+  --color-surface-800: var(--surface-800);
+  --color-surface-700: var(--surface-700);
   
   --font-sans: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
 }
 
+:root {
+  --surface-950: #f8fafc;
+  --surface-900: #f1f5f9;
+  --surface-800: #e2e8f0;
+  --surface-700: #cbd5e1;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  --surface-950: #0a0a0c;
+  --surface-900: #121214;
+  --surface-800: #1a1a1e;
+  --surface-700: #2a2a30;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+}
+
 @layer base {
   body {
-    @apply bg-[#0a0a0c] text-slate-100 font-sans antialiased selection:bg-primary/30;
+    @apply bg-surface-950 text-[var(--text-main)] font-sans antialiased selection:bg-primary/30;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  html {
+    @apply overflow-x-hidden;
+  }
+  * {
+    @apply box-border;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:border-primary/20 hover:shadow-primary/10 hover:scale-[1.02];
+    @apply backdrop-blur-xl border border-[var(--border-color)] rounded-3xl p-6 shadow-2xl transition-all duration-300 hover:border-primary/20 hover:shadow-primary/10 hover:scale-[1.02];
+    background-color: var(--glass-bg);
   }
   
   .btn-primary {
@@ -29,7 +61,7 @@
   }
   
   .sidebar-link {
-    @apply flex items-center gap-3 px-4 py-3.5 text-slate-400 hover:text-white hover:bg-white/[0.05] rounded-2xl transition-all duration-300 hover:scale-[1.02];
+    @apply flex items-center gap-3 px-4 py-3.5 text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/[0.05] rounded-2xl transition-all duration-300 hover:scale-[1.02];
   }
   
   .sidebar-link-active {
@@ -95,4 +127,5 @@
     @apply p-4;
   }
 }
+
 

@@ -57,23 +57,24 @@ const Dashboard = () => {
         );
     }
 
-    if (!data) return <div className="text-white">Error loading data.</div>;
+    if (!data) return <div className="text-[var(--text-main)]">Error loading data.</div>;
 
     const COLORS = ['#ff4d6d', '#ff758f', '#ff85a1', '#ffb3c1', '#ffccd5', '#8b5cf6', '#3b82f6'];
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Page Header */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h2 className="text-3xl font-bold text-white tracking-tight">Analytics Dashboard</h2>
-                    <p className="text-slate-400 mt-1">Real-time analysis of crimes against women across India (2001-2021).</p>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
+                <div className="flex-1">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-main)] tracking-tight">Analytics Dashboard</h2>
+                    <p className="text-[var(--text-muted)] mt-1">Real-time analysis of crimes against women across India (2001-2021).</p>
                 </div>
-                <div className="bg-primary/10 border border-primary/20 px-4 py-2 rounded-2xl flex items-center gap-2">
+                <div className="bg-primary/10 border border-primary/20 px-4 py-2 rounded-2xl flex items-center gap-2 w-fit">
                     <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                     <span className="text-primary text-sm font-bold uppercase tracking-wider">Live Dataset</span>
                 </div>
             </div>
+
 
             {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -113,8 +114,8 @@ const Dashboard = () => {
                 <div className="glass-card flex flex-col group">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors">Crime Trends (Yearly)</h3>
-                            <p className="text-slate-400 text-sm">Aggregated reported cases over time</p>
+                            <h3 className="text-lg font-bold text-[var(--text-main)] group-hover:text-primary transition-colors">Crime Trends (Yearly)</h3>
+                            <p className="text-[var(--text-muted)] text-sm">Aggregated reported cases over time</p>
                         </div>
                         <div className="p-3 bg-surface-800 border border-white/5 rounded-2xl text-primary shadow-inner">
                             <LineChartIcon size={20} />
@@ -123,17 +124,19 @@ const Dashboard = () => {
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={data.trendData}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-[var(--border-color)] opacity-20" vertical={false} />
                                 <XAxis 
                                     dataKey="year" 
-                                    stroke="#64748b" 
+                                    stroke="currentColor" 
+                                    className="text-[var(--text-muted)]"
                                     fontSize={12} 
                                     tickLine={false} 
                                     axisLine={false} 
                                     dy={10}
                                 />
                                 <YAxis 
-                                    stroke="#64748b" 
+                                    stroke="currentColor" 
+                                    className="text-[var(--text-muted)]"
                                     fontSize={12} 
                                     tickLine={false} 
                                     axisLine={false}
@@ -141,11 +144,11 @@ const Dashboard = () => {
                                 />
                                 <Tooltip 
                                     contentStyle={{ 
-                                        backgroundColor: '#121214', 
-                                        borderColor: '#2a2a30',
+                                        backgroundColor: 'var(--surface-900)', 
+                                        borderColor: 'var(--border-color)',
                                         borderRadius: '16px',
-                                        color: '#f1f5f9',
-                                        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)'
+                                        color: 'var(--text-main)',
+                                        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                                     }}
                                     itemStyle={{ color: '#ff4d6d' }}
                                 />
@@ -166,8 +169,8 @@ const Dashboard = () => {
                 <div className="glass-card flex flex-col group">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <h3 className="text-lg font-bold text-white group-hover:text-secondary transition-colors">Top 10 Affected States</h3>
-                            <p className="text-slate-400 text-sm">States with highest cumulative cases</p>
+                            <h3 className="text-lg font-bold text-[var(--text-main)] group-hover:text-secondary transition-colors">Top 10 Affected States</h3>
+                            <p className="text-[var(--text-muted)] text-sm">States with highest cumulative cases</p>
                         </div>
                         <div className="p-3 bg-surface-800 border border-white/5 rounded-2xl text-secondary shadow-inner">
                             <BarChartIcon size={20} />
@@ -176,12 +179,13 @@ const Dashboard = () => {
                     <div className="h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={data.topStates} layout="vertical">
-                                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={false} />
+                                <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-[var(--border-color)] opacity-20" horizontal={false} />
                                 <XAxis type="number" hide />
                                 <YAxis 
                                     dataKey="name" 
                                     type="category" 
-                                    stroke="#64748b" 
+                                    stroke="currentColor" 
+                                    className="text-[var(--text-muted)]"
                                     fontSize={10} 
                                     tickLine={false} 
                                     axisLine={false}
@@ -190,9 +194,10 @@ const Dashboard = () => {
                                 <Tooltip 
                                     cursor={{fill: 'rgba(255, 255, 255, 0.05)'}}
                                     contentStyle={{ 
-                                        backgroundColor: '#121214', 
-                                        borderColor: '#2a2a30',
-                                        borderRadius: '16px'
+                                        backgroundColor: 'var(--surface-900)', 
+                                        borderColor: 'var(--border-color)',
+                                        borderRadius: '16px',
+                                        color: 'var(--text-main)'
                                     }}
                                 />
                                 <Bar dataKey="count" radius={[0, 8, 8, 0]}>
@@ -210,8 +215,8 @@ const Dashboard = () => {
             <div className="glass-card group">
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h3 className="text-lg font-bold text-white group-hover:text-primary transition-colors">Crime Type Distribution</h3>
-                        <p className="text-slate-400 text-sm">National breakdown by legal classification</p>
+                        <h3 className="text-lg font-bold text-[var(--text-main)] group-hover:text-primary transition-colors">Crime Type Distribution</h3>
+                        <p className="text-[var(--text-muted)] text-sm">National breakdown by legal classification</p>
                     </div>
                     <div className="p-3 bg-surface-800 border border-white/5 rounded-2xl text-primary shadow-inner">
                         <PieChartIcon size={20} />
@@ -236,9 +241,10 @@ const Dashboard = () => {
                             </Pie>
                             <Tooltip 
                                 contentStyle={{ 
-                                    backgroundColor: '#121214', 
-                                    borderColor: '#2a2a30',
-                                    borderRadius: '16px'
+                                    backgroundColor: 'var(--surface-900)', 
+                                    borderColor: 'var(--border-color)',
+                                    borderRadius: '16px',
+                                    color: 'var(--text-main)'
                                 }}
                             />
                             <Legend verticalAlign="bottom" height={36}/>
