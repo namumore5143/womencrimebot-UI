@@ -67,16 +67,11 @@ const Dashboard = () => {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
                 <div className="flex-1">
                     <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text-main)] tracking-tight">Analytics Dashboard</h2>
-                    <p className="text-[var(--text-muted)] mt-1">Real-time analysis of crimes against women across India (2001-2021).</p>
-                </div>
-                <div className="bg-primary/10 border border-primary/20 px-4 py-2 rounded-2xl flex items-center gap-2 w-fit">
-                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                    <span className="text-primary text-sm font-bold uppercase tracking-wider">Live Dataset</span>
+                    <p className="text-[var(--text-muted)] mt-1">Comprehensive analysis of crimes against women across India (2001-2021).</p>
                 </div>
             </div>
 
 
-            {/* KPI Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <KpiCard 
                     title="Total Cases (2001-2021)" 

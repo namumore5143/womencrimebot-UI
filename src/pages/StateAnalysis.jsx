@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { 
     Filter, 
     ChevronDown, 
@@ -26,6 +27,7 @@ import { loadCrimeData, getStateAnalysisData } from '../utils/dataLoader';
 const COLORS = ['#ff4d6d', '#ff85a1', '#8b5cf6', '#3b82f6', '#10b981'];
 
 const StateAnalysis = () => {
+    const [searchParams] = useSearchParams();
     const [allData, setAllData] = useState([]);
     const [states, setStates] = useState([]);
     const [selectedState, setSelectedState] = useState("");
@@ -42,7 +44,11 @@ const StateAnalysis = () => {
             setStates(uniqueStates);
             
             if (uniqueStates.length > 0) {
-                const defaultState = uniqueStates.includes("Maharashtra") ? "Maharashtra" : uniqueStates[0];
+                // Check URL param first, then default to Maharashtra or first state
+                const urlState = searchParams.get('state');
+                const defaultState = (urlState && uniqueStates.includes(urlState))
+                    ? urlState
+                    : uniqueStates.includes("Maharashtra") ? "Maharashtra" : uniqueStates[0];
                 setSelectedState(defaultState);
                 const processed = getStateAnalysisData(data, defaultState);
                 setStateData(processed);
@@ -50,7 +56,7 @@ const StateAnalysis = () => {
             setLoading(false);
         };
         fetchData();
-    }, []);
+    }, [searchParams]);
 
     const handleStateChange = (e) => {
         const state = e.target.value;

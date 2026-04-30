@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 
 const Layout = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
-        <div className="min-h-screen bg-surface-950 flex">
-            {/* Sidebar - always visible on desktop */}
+        <div className="min-h-screen bg-surface-950 flex flex-col lg:flex-row">
+            {/* Sidebar - drawer on mobile, fixed on desktop */}
             <Sidebar
-                isOpen={false}
-                onClose={() => {}}
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
             />
 
-            {/* Main content - proper flex layout without negative margins */}
-            <div className="flex-1 flex flex-col min-h-screen lg:ml-72">
-                <Header onMenuClick={() => {}} />
-                <main className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 transition-all">
+            {/* Main content area */}
+            <div className="flex-1 flex flex-col min-h-screen w-full lg:ml-72">
+                <Header onMenuClick={() => setSidebarOpen(true)} />
+                <main className="flex-1 px-4 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-10 lg:py-10 transition-all overflow-x-hidden">
                     <Outlet />
                 </main>
             </div>
@@ -24,4 +26,3 @@ const Layout = () => {
 };
 
 export default Layout;
-
